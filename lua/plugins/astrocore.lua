@@ -1,4 +1,4 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
 -- Configuration documentation can be found with `:h astrocore`
@@ -32,6 +32,7 @@ return {
         spell = false, -- sets vim.opt.spell
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = false, -- sets vim.opt.wrap
+	tabstop = 8,
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
@@ -49,6 +50,15 @@ return {
         -- navigate buffer tabs
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+
+	-- LSP key
+	["gra"] = false,
+	["grn"] = false,
+	["grr"] = false,
+	["gaa"] = { function() vim.lsp.buf.code_action() end, desc = "vim.lsp.buf.code_action()" },
+	["gan"] = { function() vim.lsp.buf.rename() end, desc = "vim.lsp.buf.rename()" },
+	["gar"] = { function() vim.lsp.buf.references() end, desc = "vim.lsp.buf.references()" },
+	["gr"] = { function() require("telescope.builtin").lsp_references() end, desc = "Search References" },
 
         -- mappings seen under group name "Buffer"
         ["<Leader>bd"] = {
